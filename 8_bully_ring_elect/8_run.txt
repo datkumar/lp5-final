@@ -1,0 +1,37 @@
+------------------------------------------
+javac Ring.java
+java Ring
+
+10
+
+------------------------------------------
+------------------------------------------
+
+javac Bully.java
+java Bully
+
+Total process: 8
+process 1:
+    status: 1
+    priority: 2
+process 2:
+    status: 1
+    priority: 2
+process 3:
+    status: 0
+    priority: 0
+process 4:
+    status: 1
+    priority: 1
+process 5:
+    status: 1
+    priority: 5
+process 6:
+    status: 1
+    priority: 7
+process 7:
+    status: 0
+    priority: 6
+process 8:
+    status: 0
+    priority: 4

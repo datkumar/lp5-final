@@ -1,0 +1,3 @@
+mpicc assign3.c -o object_file
+
+mpirun -np 4 object_file
