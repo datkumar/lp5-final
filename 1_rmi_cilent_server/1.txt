@@ -1,0 +1,81 @@
+Multi-threaded Client Server Process comm. using RMI
+----------------------------------------------------------------------
+//AddClient
+
+import java.net.*;
+import java.rmi.*;
+import java.rmi.server.*;
+import java.util.*;
+
+public class AddClient {
+
+  public static void main(String[] args) throws RemoteException {
+    try {
+      String url = "rmi://127.0.0.1/AddServer";
+      AddServerIntf addServerIntf = (AddServerIntf) Naming.lookup(url);
+      Scanner sc = new Scanner(System.in);
+      System.out.println("Enter First Number : ");
+      double a = sc.nextDouble();
+      System.out.println("Enter Second Number : ");
+      double b = sc.nextDouble();
+      System.out.println("Result : " + addServerIntf.add(a, b));
+    } catch (Exception e) {
+      System.out.println("Exception" + e);
+    }
+  }
+}
+
+----------------------------------------------------------------------
+
+// AddServer
+import java.net.*;
+import java.rmi.*;
+import java.rmi.server.*;
+
+public class AddServer {
+
+  public static void main(String[] args) throws RemoteException {
+    try {
+      AddServerImpl addServerImpl = new AddServerImpl();
+      String url = "rmi://127.0.0.1/AddServer";
+      Naming.rebind(url, addServerImpl);
+    } catch (Exception e) {
+      System.out.println("Exception" + e);
+    }
+  }
+}
+----------------------------------------------------------------------
+
+//AddServerImpl
+
+import java.net.*;
+import java.rmi.*;
+import java.rmi.server.*;
+
+public class AddServerImpl
+  extends UnicastRemoteObject
+  implements AddServerIntf {
+
+  public AddServerImpl() throws RemoteException {}
+
+  public double add(double a, double b) throws RemoteException {
+    return a + b;
+  }
+}
+
+----------------------------------------------------------------------
+//AddServerIntf
+
+import java.net.*;
+import java.rmi.*;
+import java.rmi.server.*;
+
+public interface AddServerIntf extends Remote {
+  double add(double a, double b) throws RemoteException;
+}
+----------------------------------------------------------------------
+
+
+
+
+
